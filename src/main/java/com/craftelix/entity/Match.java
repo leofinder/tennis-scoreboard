@@ -12,21 +12,21 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "matches")
-public class Match {
+public class Match implements BaseEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "player1_id")
     private Player player1;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "player2_id")
     private Player player2;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player_id")
+    @JoinColumn(name = "winner_id")
     private Player winner;
 }
