@@ -1,12 +1,15 @@
 package com.craftelix.repository;
 
 import com.craftelix.entity.Player;
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
+import java.util.Optional;
 
 public class PlayerRepository extends RepositoryBase<Long, Player> {
 
-    public PlayerRepository(SessionFactory sessionFactory) {
-        super(Player.class, sessionFactory);
+    public PlayerRepository(Session session) {
+        super(Player.class, session);
     }
 
 }
