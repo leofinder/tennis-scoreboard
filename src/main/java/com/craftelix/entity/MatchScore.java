@@ -5,6 +5,10 @@ import lombok.Data;
 @Data
 public class MatchScore {
 
-    private Match match;
-    private Score score;
+    private byte setPlayer1;
+    private byte setPlayer2;
+    private byte gamePlayer1;
+    private byte gamePlayer2;
+    private Point pointPlayer1;
+    private Point pointPlayer2;
 }

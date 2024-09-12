@@ -29,4 +29,7 @@ public class Match implements BaseEntity<Long> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "winner_id")
     private Player winner;
+
+    @Transient
+    private MatchScore score;
 }
