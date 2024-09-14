@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/")
+@WebServlet("")
 public class MainController extends HttpServlet {
 
     @Override
