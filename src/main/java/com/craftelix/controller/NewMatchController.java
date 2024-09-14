@@ -25,15 +25,15 @@ public class NewMatchController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String player1 = req.getParameter("player1");
-        String player2 = req.getParameter("player2");
+        String playerOne = req.getParameter("player-one");
+        String playerTwo = req.getParameter("player-two");
 
-        PlayerRequestDto playerRequestDto1 = new PlayerRequestDto(player1);
-        PlayerRequestDto playerRequestDto2 = new PlayerRequestDto(player2);
+        PlayerRequestDto playerOneRequestDto = new PlayerRequestDto(playerOne);
+        PlayerRequestDto playerTwoRequestDto = new PlayerRequestDto(playerTwo);
 
-        ValidationUtil.validatePlayers(playerRequestDto1, playerRequestDto2);
+        ValidationUtil.validatePlayers(playerOneRequestDto, playerTwoRequestDto);
 
-        UUID uuid = ongoingMatchesService.createMatch(playerRequestDto1, playerRequestDto2);
+        UUID uuid = ongoingMatchesService.createMatch(playerOneRequestDto, playerTwoRequestDto);
 
         resp.sendRedirect("/match-score?uuid=" + uuid.toString());
     }

@@ -31,13 +31,11 @@
                     <fieldset>
                         <legend>Enter Player Names</legend>
 
-                        <label for="player1">Player 1 name:</label>
-                        <input type="text" id="player1" name="player1" required>
-                        <br><br>
+                        <label for="player-one">Player 1 name:</label>
+                        <input type="text" id="player-one" name="player-one" required>
 
-                        <label for="player2">Player 2 name:</label>
-                        <input type="text" id="player2" name="player2" required>
-                        <br><br>
+                        <label for="player-two">Player 2 name:</label>
+                        <input type="text" id="player-two" name="player-two" required>
 
                         <button type="submit">Play</button>
                     </fieldset>
