@@ -2,60 +2,45 @@ package com.craftelix.service;
 
 import com.craftelix.dto.PlayerRequestDto;
 import com.craftelix.entity.Match;
+import com.craftelix.entity.MatchScore;
 import com.craftelix.entity.Player;
+import com.craftelix.entity.PlayerScore;
 import com.craftelix.mapper.PlayerMapper;
-import com.craftelix.repository.PlayerRepository;
-import com.craftelix.util.HibernateUtil;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public class OngoingMatchesService {
 
-    @Getter(lazy = true)
-    private static final OngoingMatchesService instance = new OngoingMatchesService();
+    private static final OngoingMatchesService INSTANCE = new OngoingMatchesService();
 
-    private final Map<UUID, Match> ongoingMatches = new HashMap<>();
+    private final ConcurrentMap<UUID, Match> ongoingMatches = new ConcurrentHashMap<>();
 
     private final PlayerMapper playerMapper = PlayerMapper.INSTANCE;
 
-    private void savePlayers(Player player1, Player player2) {
-
-        Session session = HibernateUtil.getSession();
-
-        session.beginTransaction();
-
-        PlayerRepository playerRepository = new PlayerRepository(session);
-        if (playerRepository.findByName(player1.getName()).isEmpty()) {
-            playerRepository.save(player1);
-        }
-        if (playerRepository.findByName(player2.getName()).isEmpty()) {
-            playerRepository.save(player2);
-        }
-
-        session.getTransaction().commit();
+    public static OngoingMatchesService getInstance() {
+        return INSTANCE;
     }
 
-    public UUID createMatch(PlayerRequestDto playerRequestDto1, PlayerRequestDto playerRequestDto2) {
+    public UUID createMatch(PlayerRequestDto playerOneRequestDto, PlayerRequestDto playerTwoRequestDto) {
 
-        Player player1 = playerMapper.toEntity(playerRequestDto1);
-        Player player2 = playerMapper.toEntity(playerRequestDto2);
+        Player playerOne = playerMapper.toEntity(playerOneRequestDto);
+        Player playerTwo = playerMapper.toEntity(playerTwoRequestDto);
 
-        savePlayers(player1, player2);
+        PlayerService.getInstance().findOrSavePlayers(playerOne, playerTwo);
 
         UUID uuid = UUID.randomUUID();
 
         Match match = Match.builder()
-                .player1(player1)
-                .player2(player2)
+                .playerOne(playerOne)
+                .playerTwo(playerTwo)
+                .score(new MatchScore(new PlayerScore(), new PlayerScore()))
                 .build();
 
         ongoingMatches.put(uuid, match);
@@ -70,4 +55,5 @@ public class OngoingMatchesService {
     public void deleteMatch(UUID uuid) {
         ongoingMatches.remove(uuid);
     }
+
 }
