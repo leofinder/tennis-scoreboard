@@ -22,7 +22,7 @@ public class ValidationUtil {
             throw new InvalidParameterException("Player 2 name cannot be blank");
         }
 
-        if (playerName1.equals(playerName2)) {
+        if (playerName1.equalsIgnoreCase(playerName2)) {
             throw new InvalidParameterException("Player names cannot be the same");
         }
     }
