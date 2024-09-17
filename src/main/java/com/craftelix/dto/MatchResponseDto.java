@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MatchResponseDto {
 
-    private String player1;
+    private PlayerResponseDto playerOne;
 
-    private String player2;
+    private PlayerResponseDto playerTwo;
 
-    private String winner;
+    private PlayerResponseDto winner;
+
+    private MatchScoreResponseDto score;
 }
