@@ -1,11 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tennis Scoreboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
@@ -18,7 +18,7 @@
                     <a href="/new-match" class="header-menu__link">New Match</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="/matches" class="header-menu__link">Matches</a>
+                    <a href="$/matches" class="header-menu__link">Matches</a>
                 </li>
             </ul>
         </nav>

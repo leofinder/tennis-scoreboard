@@ -1,11 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matches. Tennis Scoreboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
@@ -35,7 +36,6 @@
                 </form>
 
                 <div class="search-results">
-                    <!-- Заголовок -->
                     <div class="result-item header">
                         <div class="id">id</div>
                         <div class="player">Player 1</div>
@@ -43,22 +43,16 @@
                         <div class="winner">Winner</div>
                     </div>
 
-                    <!-- Пример результатов -->
+                    <c:forEach var="match" items="${requestScope.matches}">
                     <div class="result-item">
-                        <div class="id">1</div>
-                        <div class="player">John Doe</div>
-                        <div class="player">Jane Smith</div>
-                        <div class="winner">John Doe</div>
+                        <div class="id">${match.id}</div>
+                        <div class="player">${match.playerOne.name}</div>
+                        <div class="player">${match.playerTwo.name}</div>
+                        <div class="winner">${match.winner.name}</div>
                     </div>
-                    <div class="result-item">
-                        <div class="id">2</div>
-                        <div class="player">Alice Johnson</div>
-                        <div class="player">Bob Lee</div>
-                        <div class="winner">Alice Johnson</div>
-                    </div>
+                    </c:forEach>
                 </div>
 
-                <!-- Пагинация -->
                 <div class="pagination">
                     <a href="?page=prev" class="pagination-link prev">Prev</a>
                     <span class="pagination-info">Page 1 of 10</span> <!-- Текущая страница и общее количество страниц -->
