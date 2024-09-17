@@ -20,4 +20,5 @@ public class Player implements BaseEntity<Long> {
 
     @Column(nullable = false, unique = true)
     private String name;
+
 }

@@ -1,10 +1,7 @@
 package com.craftelix.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -18,18 +15,18 @@ public class Match implements BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player1_id")
-    private Player player1;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "player_one_id")
+    private Player playerOne;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "player2_id")
-    private Player player2;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "player_two_id")
+    private Player playerTwo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "winner_id")
     private Player winner;
 
     @Transient
-    private MatchScore score;
+    private MatchScore score = new MatchScore();
 }
