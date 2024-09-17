@@ -2,7 +2,10 @@ package com.craftelix.util;
 
 import com.craftelix.dto.PlayerRequestDto;
 import com.craftelix.exception.InvalidParameterException;
+import com.craftelix.exception.NotFoundException;
 import lombok.experimental.UtilityClass;
+
+import java.util.UUID;
 
 @UtilityClass
 public class ValidationUtil {
@@ -21,6 +24,24 @@ public class ValidationUtil {
 
         if (playerName1.equals(playerName2)) {
             throw new InvalidParameterException("Player names cannot be the same");
+        }
+    }
+
+    public static void validateUUID(String uuid) {
+        if (uuid == null || uuid.isBlank()) {
+            throw new NotFoundException("UUID cannot be blank");
+        }
+
+        try {
+            UUID.fromString(uuid);
+        } catch (IllegalArgumentException e) {
+            throw new NotFoundException("Invalid UUID");
+        }
+    }
+
+    public static void validatePlayerType(String playerTypeString) {
+        if (playerTypeString == null || playerTypeString.isBlank()) {
+            throw new InvalidParameterException("Invalid player type");
         }
     }
 }
