@@ -3,6 +3,7 @@ package com.craftelix.controller;
 import com.craftelix.dto.PlayerRequestDto;
 import com.craftelix.service.OngoingMatchesService;
 import com.craftelix.util.JspHelper;
+import com.craftelix.util.StringUtil;
 import com.craftelix.util.ValidationUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,6 +28,9 @@ public class NewMatchController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String playerOne = req.getParameter("player-one");
         String playerTwo = req.getParameter("player-two");
+
+        playerOne = StringUtil.capitalizeFirstLetters(playerOne);
+        playerTwo = StringUtil.capitalizeFirstLetters(playerTwo);
 
         PlayerRequestDto playerOneRequestDto = new PlayerRequestDto(playerOne);
         PlayerRequestDto playerTwoRequestDto = new PlayerRequestDto(playerTwo);
