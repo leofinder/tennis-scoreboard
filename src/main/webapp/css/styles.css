@@ -354,6 +354,17 @@ legend {
     background-color: #218838;
 }
 
+.error-card {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+}
+
+
 /* Media Queries for Mobile Devices */
 @media (max-width: 768px) {
     header {
