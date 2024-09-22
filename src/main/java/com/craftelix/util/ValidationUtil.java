@@ -44,4 +44,13 @@ public class ValidationUtil {
             throw new InvalidParameterException("Invalid player type");
         }
     }
+
+    public static void validatePage(String page) {
+        if (page == null || page.isBlank()) {
+            return;
+        }
+        if (!page.matches("^[1-9]\\d*$")) {
+            throw new InvalidParameterException("Invalid page number");
+        }
+    }
 }

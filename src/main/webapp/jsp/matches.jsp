@@ -30,7 +30,7 @@
             <div class="search-pagination-container">
                 <!-- Форма поиска -->
                 <form action="/matches" method="GET" class="search-form">
-                    <input type="text" name="query" placeholder="Search..." class="search-input" value="">
+                    <input type="text" name="filter_by_player_name" placeholder="Search..." class="search-input" value="${requestScope.playerName}">
                     <button type="submit" class="search-button">Search</button>
                     <button type="button" class="clear-button" onclick="clearSearch()">х</button>
                 </form>
@@ -54,9 +54,13 @@
                 </div>
 
                 <div class="pagination">
-                    <a href="?page=prev" class="pagination-link prev">Prev</a>
-                    <span class="pagination-info">Page 1 of 10</span> <!-- Текущая страница и общее количество страниц -->
-                    <a href="?page=next" class="pagination-link next">Next</a>
+                    <c:if test="${requestScope.page > 1}">
+                        <a href="?page=${requestScope.page - 1}&filter_by_player_name=${requestScope.playerName}" class="pagination-link prev">Prev</a>
+                    </c:if>
+                    <span class="pagination-info">Page ${requestScope.page} of ${requestScope.pageCount} </span>
+                    <c:if test="${requestScope.page < requestScope.pageCount}">
+                        <a href="?page=${requestScope.page + 1}&filter_by_player_name=${requestScope.playerName}" class="pagination-link next">Next</a>
+                    </c:if>
                 </div>
             </div>
         </section>
