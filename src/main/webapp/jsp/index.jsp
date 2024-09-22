@@ -18,7 +18,7 @@
                     <a href="/new-match" class="header-menu__link">New Match</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="$/matches" class="header-menu__link">Matches</a>
+                    <a href="/matches" class="header-menu__link">Matches</a>
                 </li>
             </ul>
         </nav>
