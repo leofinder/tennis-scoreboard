@@ -26,7 +26,7 @@ public class HibernateUtil {
                 Configuration configuration = new Configuration().configure();
                 sessionFactory = configuration.buildSessionFactory();
             } catch (Throwable t) {
-                log.error("FATAL error. {}", t.getMessage());
+                log.error("FATAL ERROR. {}", t.getMessage());
                 throw t;
             }
         }
