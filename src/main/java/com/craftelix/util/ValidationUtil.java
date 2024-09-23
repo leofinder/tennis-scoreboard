@@ -2,7 +2,6 @@ package com.craftelix.util;
 
 import com.craftelix.dto.PlayerRequestDto;
 import com.craftelix.exception.InvalidParameterException;
-import com.craftelix.exception.NotFoundException;
 import lombok.experimental.UtilityClass;
 
 import java.util.UUID;
@@ -29,13 +28,13 @@ public class ValidationUtil {
 
     public static void validateUUID(String uuid) {
         if (uuid == null || uuid.isBlank()) {
-            throw new NotFoundException("UUID cannot be blank");
+            throw new InvalidParameterException("UUID cannot be blank");
         }
 
         try {
             UUID.fromString(uuid);
         } catch (IllegalArgumentException e) {
-            throw new NotFoundException("Invalid UUID");
+            throw new InvalidParameterException("Invalid UUID");
         }
     }
 
