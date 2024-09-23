@@ -11,6 +11,12 @@
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
 
+    <property name="hibernate.hikari.minimumIdle">5</property>
+    <property name="hibernate.hikari.maximumPoolSize">20</property>
+    <property name="hibernate.hikari.idleTimeout">30000</property>
+    <property name="hibernate.hikari.connectionTimeout">30000</property>
+    <property name="hibernate.hikari.maxLifetime">1800000</property>
+
 <!--    <property name="hibernate.hbm2ddl.auto"/>-->
     
     <property name="hibernate.current_session_context_class">thread</property>
