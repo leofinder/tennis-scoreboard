@@ -38,8 +38,4 @@ public class HibernateUtil {
         }
     }
 
-    public static Session getSession() {
-        return (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
-                ((proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(), args)));
-    }
 }
