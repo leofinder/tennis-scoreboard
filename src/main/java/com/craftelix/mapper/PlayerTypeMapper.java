@@ -7,6 +7,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface PlayerTypeMapper {
+
     PlayerTypeMapper INSTANCE = Mappers.getMapper(PlayerTypeMapper.class);
 
     @ValueMapping(target = "PLAYER_ONE", source = "player-one")
