@@ -3,7 +3,7 @@ package com.craftelix.service;
 import com.craftelix.dto.*;
 import com.craftelix.entity.Match;
 import com.craftelix.entity.Player;
-import com.craftelix.exception.InvalidParameterException;
+import com.craftelix.exception.NotFoundException;
 import com.craftelix.mapper.FinishedMatchMapper;
 import com.craftelix.repository.MatchRepository;
 import com.craftelix.util.HibernateUtil;
@@ -37,16 +37,16 @@ public class FinishedMatchesPersistenceService {
         MatchRepository matchRepository = new MatchRepository(session);
 
         Long count = matchRepository.countMatchesByFilter(filter);
-        if (count <= (long) (page - 1) * PAGE_SIZE) {
-            throw new InvalidParameterException("Invalid page number");
-        }
 
         int offset = (page - 1) * PAGE_SIZE;
+        int pageCount = count == 0 ? 1 : (int) (count + PAGE_SIZE - 1) / PAGE_SIZE;
+
+        if (page > pageCount) {
+            session.getTransaction().rollback();
+            throw new NotFoundException("No more matches found");
+        }
 
         List<Match> matches = matchRepository.findMatchesByFilter(filter, offset, PAGE_SIZE);
-
-        long pageCount = (count + PAGE_SIZE - 1) / PAGE_SIZE;
-
         List<FinishedMatchResponseDto> matchesDto =  matches.stream()
                                                         .map(finishedMatchMapper::toDto)
                                                         .collect(Collectors.toList());
