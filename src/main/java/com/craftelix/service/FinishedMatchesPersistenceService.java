@@ -20,11 +20,11 @@ public class FinishedMatchesPersistenceService {
 
     private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
 
+    private final int PAGE_SIZE = 10;
+
     private final PlayerService playerService = PlayerService.getInstance();
 
     private final FinishedMatchMapper finishedMatchMapper = FinishedMatchMapper.INSTANCE;
-
-    private final int PAGE_SIZE = 10;
 
     public static FinishedMatchesPersistenceService getInstance() {
         return INSTANCE;
