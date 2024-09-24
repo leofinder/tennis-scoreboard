@@ -36,7 +36,6 @@ public class MatchScoreController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String uuid = req.getParameter("uuid");
 
         ValidationUtil.validateUUID(uuid);
@@ -48,7 +47,6 @@ public class MatchScoreController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String uuid = req.getParameter("uuid");
         String playerTypeString = req.getParameter("player");
 
@@ -60,9 +58,11 @@ public class MatchScoreController extends HttpServlet {
         MatchScore score = matchScoreCalculationService.updateMatchPoint(match.getScore(), playerType);
 
         if (matchScoreCalculationService.isMatchOver(score)) {
-            FinishedMatchRequestDto finishedMatchRequestDto = buildFinishedMatchRequestDto(match, playerType);
             ongoingMatchesService.deleteMatch(UUID.fromString(uuid));
+
+            FinishedMatchRequestDto finishedMatchRequestDto = buildFinishedMatchRequestDto(match, playerType);
             finishedMatchesPersistenceService.save(finishedMatchRequestDto);
+
             forwardToMatchResult(req, resp, match, playerType);
         } else {
             forwardToMatchScore(req, resp, uuid, match);
@@ -91,7 +91,6 @@ public class MatchScoreController extends HttpServlet {
     }
 
     private Match getMatch(String uuid) {
-
         Optional<Match> match = ongoingMatchesService.getMatch(UUID.fromString(uuid));
         if (match.isEmpty()) {
             throw new NotFoundException("Match not found");

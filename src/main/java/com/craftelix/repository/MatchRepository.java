@@ -17,7 +17,6 @@ public class MatchRepository extends RepositoryBase<Long, Match> {
     }
 
     public List<Match> findMatchesByFilter(FilterRequestDto filter, int offset, int limit) {
-
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Match> criteria = cb.createQuery(Match.class);
         Root<Match> match = criteria.from(Match.class);
@@ -33,7 +32,6 @@ public class MatchRepository extends RepositoryBase<Long, Match> {
     }
 
     public Long countMatchesByFilter(FilterRequestDto filter) {
-
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
         Root<Match> match = criteria.from(Match.class);

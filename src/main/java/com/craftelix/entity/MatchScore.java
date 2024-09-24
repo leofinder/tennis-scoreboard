@@ -9,6 +9,7 @@ public class MatchScore {
 
     @NonNull
     private PlayerScore playerOneScore;
+
     @NonNull
     private PlayerScore playerTwoScore;
 

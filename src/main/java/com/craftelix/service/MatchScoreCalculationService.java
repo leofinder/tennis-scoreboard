@@ -14,7 +14,9 @@ public class MatchScoreCalculationService {
     private static final MatchScoreCalculationService INSTANCE = new MatchScoreCalculationService();
 
     private final int GAMES_PER_SET = 6;
+
     private final int POINTS_IN_TIEBREAK = 7;
+
     private final int SETS_TO_WIN = 2;
 
     public static MatchScoreCalculationService getInstance() {
@@ -22,7 +24,7 @@ public class MatchScoreCalculationService {
     }
 
     private boolean isTiebreak(PlayerScore playerOneScore, PlayerScore playerTwoScore) {
-        return playerOneScore.getGame() == GAMES_PER_SET &&  playerTwoScore.getGame() == GAMES_PER_SET;
+        return playerOneScore.getGame() == GAMES_PER_SET && playerTwoScore.getGame() == GAMES_PER_SET;
     }
 
     private void updateScoreAfterPoint(PlayerScore winnerScore, PlayerScore loserScore) {
