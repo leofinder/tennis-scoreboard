@@ -1,6 +1,9 @@
 package com.craftelix.entity;
 
-import lombok.*;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @RequiredArgsConstructor
