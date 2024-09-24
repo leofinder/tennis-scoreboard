@@ -1,9 +1,14 @@
 package com.craftelix.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,5 +33,5 @@ public class Match implements BaseEntity<Long> {
     private Player winner;
 
     @Transient
-    private MatchScore score = new MatchScore();
+    private MatchScore score;
 }
