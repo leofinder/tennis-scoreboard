@@ -11,7 +11,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class PlayerService {
 
-    private static PlayerService INSTANCE = new PlayerService();
+    private static final PlayerService INSTANCE = new PlayerService();
 
     public static PlayerService getInstance() {
         return INSTANCE;
