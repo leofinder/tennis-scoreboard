@@ -17,18 +17,17 @@ public class PlayerService {
         return INSTANCE;
     }
 
-    public Player findOrSavePlayerInRepository(Session session, Player player) {
+    public Player findOrSavePlayer(Session session, Player player) {
         PlayerRepository playerRepository = new PlayerRepository(session);
         return playerRepository.findByName(player.getName())
                 .orElseGet(() -> playerRepository.save(player));
     }
 
     public Player findOrSavePlayer(Player player) {
-
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        player = findOrSavePlayerInRepository(session, player);
+        player = findOrSavePlayer(session, player);
 
         session.getTransaction().commit();
 
@@ -36,12 +35,11 @@ public class PlayerService {
     }
 
     public void findOrSavePlayers(Player... players) {
-
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
         for (Player player : players) {
-            findOrSavePlayerInRepository(session, player);
+            findOrSavePlayer(session, player);
         }
 
         session.getTransaction().commit();

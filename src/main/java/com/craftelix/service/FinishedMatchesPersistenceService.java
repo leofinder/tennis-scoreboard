@@ -62,9 +62,9 @@ public class FinishedMatchesPersistenceService {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        Player playerOne = playerService.findOrSavePlayerInRepository(session, match.getPlayerOne());
-        Player playerTwo = playerService.findOrSavePlayerInRepository(session, match.getPlayerTwo());
-        Player winner = playerService.findOrSavePlayerInRepository(session, match.getWinner());
+        Player playerOne = playerService.findOrSavePlayer(session, match.getPlayerOne());
+        Player playerTwo = playerService.findOrSavePlayer(session, match.getPlayerTwo());
+        Player winner = playerService.findOrSavePlayer(session, match.getWinner());
 
         MatchRepository matchRepository = new MatchRepository(session);
         matchRepository.save(Match.builder()
