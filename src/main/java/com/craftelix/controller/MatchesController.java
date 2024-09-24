@@ -22,10 +22,10 @@ public class MatchesController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("filter_by_player_name");
         String page = req.getParameter("page");
+
         ValidationUtil.validatePage(page);
 
-        FilterRequestDto filter = new FilterRequestDto(name == null ? "" : name);
-
+        FilterRequestDto filter = new FilterRequestDto(name == null ? "" : name.strip());
         int pageNumber = page == null || page.isBlank() ? 1 : Integer.parseInt(page);
 
         MatchFilterResponseDto matchFilterResponseDto = finishedMatchesPersistenceService.findByFilter(filter, pageNumber);
