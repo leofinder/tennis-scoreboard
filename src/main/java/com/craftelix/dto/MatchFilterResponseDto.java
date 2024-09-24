@@ -13,7 +13,7 @@ public class MatchFilterResponseDto {
 
     private int page;
 
-    private long pageCount;
+    private int pageCount;
 
     private String playerName;
 
