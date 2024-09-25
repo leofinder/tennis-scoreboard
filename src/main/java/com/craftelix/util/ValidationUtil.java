@@ -48,7 +48,7 @@ public class ValidationUtil {
         if (page == null || page.isBlank()) {
             return;
         }
-        if (!page.matches("^[1-9]\\d*$")) {
+        if (!page.matches("^-?\\d+$")) {
             throw new InvalidParameterException("Invalid page number");
         }
     }
