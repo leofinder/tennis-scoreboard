@@ -3,11 +3,8 @@ package com.craftelix.util;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
-import java.lang.reflect.Proxy;
 
 @Slf4j
 @UtilityClass
