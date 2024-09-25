@@ -54,13 +54,24 @@
                 </div>
 
                 <div class="pagination">
-                    <c:if test="${requestScope.page > 1}">
-                        <a href="?page=${requestScope.page - 1}&filter_by_player_name=${requestScope.playerName}" class="pagination-link prev">Prev</a>
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${requestScope.page > 1}">
+                            <a href="?page=${requestScope.page - 1}&filter_by_player_name=${requestScope.playerName}" class="pagination-link prev">Prev</a>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="pagination-link hidden">Prev</span>
+                        </c:otherwise>
+                    </c:choose>
                     <span class="pagination-info">Page ${requestScope.page} of ${requestScope.pageCount} </span>
-                    <c:if test="${requestScope.page < requestScope.pageCount}">
-                        <a href="?page=${requestScope.page + 1}&filter_by_player_name=${requestScope.playerName}" class="pagination-link next">Next</a>
-                    </c:if>
+                    <c:choose>
+                        <c:when test="${requestScope.page < requestScope.pageCount}">
+                            <a href="?page=${requestScope.page + 1}&filter_by_player_name=${requestScope.playerName}"
+                               class="pagination-link next">Next</a>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="pagination-link hidden">Next</span>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </section>

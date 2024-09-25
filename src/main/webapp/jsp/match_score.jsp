@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,24 +32,36 @@
                     <div></div>
                     <div>SETS</div>
                     <div>GAMES</div>
-                    <div class="${match.score.tiebreak ? 'hidden' : ''}">POINTS</div>
-                    <div class="${match.score.tiebreak ? '' : 'hidden'}">TIE-BREAK</div>
+                    <c:if test="${!match.score.tiebreak}">
+                        <div>POINTS</div>
+                    </c:if>
+                    <c:if test="${match.score.tiebreak}">
+                        <div>TIE-BREAK</div>
+                    </c:if>
                 </div>
 
                 <div class="score-row">
                     <div>${match.playerOne.name}</div>
                     <div id="player1-set">${match.score.playerOneScore.set}</div>
                     <div id="player1-game">${match.score.playerOneScore.game}</div>
-                    <div id="player1-points" class="${match.score.tiebreak ? 'hidden' : ''}">${match.score.playerOneScore.point}</div>
-                    <div id="player1-tiebreak" class="${match.score.tiebreak ? '' : 'hidden'}">${match.score.playerOneScore.tiebreak}</div>
+                    <c:if test="${!match.score.tiebreak}">
+                        <div id="player1-points">${match.score.playerOneScore.point}</div>
+                    </c:if>
+                    <c:if test="${match.score.tiebreak}">
+                        <div id="player1-tiebreak">${match.score.playerOneScore.tiebreak}</div>
+                    </c:if>
                 </div>
 
                 <div class="score-row">
                     <div>${match.playerTwo.name}</div>
                     <div id="player2-set">${match.score.playerTwoScore.set}</div>
                     <div id="player2-game">${match.score.playerTwoScore.game}</div>
-                    <div id="player2-points" class="${match.score.tiebreak ? 'hidden' : ''}">${match.score.playerTwoScore.point}</div>
-                    <div id="player2-tiebreak" class="${match.score.tiebreak ? '' : 'hidden'}">${match.score.playerTwoScore.tiebreak}</div>
+                    <c:if test="${!match.score.tiebreak}">
+                        <div id="player2-points">${match.score.playerTwoScore.point}</div>
+                    </c:if>
+                    <c:if test="${match.score.tiebreak}">
+                        <div id="player2-tiebreak">${match.score.playerTwoScore.tiebreak}</div>
+                    </c:if>
                 </div>
 
                 <form action="/match-score?uuid=${uuid}" method="POST" onsubmit="setTimeout(disableButtons, 0)">
