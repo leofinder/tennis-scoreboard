@@ -288,12 +288,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(0, 6, Point.POINTS_0, 6);
         PlayerScore playerTwoScore = new PlayerScore(0, 6, Point.POINTS_0, 5);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_ONE);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(0, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -303,12 +306,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(0, 6, Point.POINTS_0, 6);
         PlayerScore playerTwoScore = new PlayerScore(0, 6, Point.POINTS_0, 7);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_TWO);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(0, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -354,12 +360,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(1, 6, Point.POINTS_0, 7);
         PlayerScore playerTwoScore = new PlayerScore(1, 6, Point.POINTS_0, 6);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_ONE);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(2, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
 
@@ -372,12 +381,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(1, 6, Point.POINTS_0, 3);
         PlayerScore playerTwoScore = new PlayerScore(1, 6, Point.POINTS_0, 6);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_TWO);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(2, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
 
@@ -390,12 +402,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(0, 6, Point.POINTS_0, 6);
         PlayerScore playerTwoScore = new PlayerScore(1, 6, Point.POINTS_0, 5);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_ONE);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -405,12 +420,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(0, 6, Point.POINTS_0, 3);
         PlayerScore playerTwoScore = new PlayerScore(1, 6, Point.POINTS_0, 6);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_TWO);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(0, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(2, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -420,12 +438,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(0, 6, Point.POINTS_0, 8);
         PlayerScore playerTwoScore = new PlayerScore(0, 6, Point.POINTS_0, 7);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_ONE);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(0, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
     }
@@ -435,12 +456,15 @@ class MatchScoreCalculationServiceTest {
         PlayerScore playerOneScore = new PlayerScore(0, 6, Point.POINTS_0, 8);
         PlayerScore playerTwoScore = new PlayerScore(0, 6, Point.POINTS_0, 9);
         MatchScore score = new MatchScore(playerOneScore, playerTwoScore);
+        score.setTiebreak(true);
 
         MatchScore result = matchScoreCalculationService.updateMatchPoint(score, PlayerType.PLAYER_TWO);
 
         PlayerScore playerOneScoreExpected = new PlayerScore(0, 0, Point.POINTS_0, 0);
         PlayerScore playerTwoScoreExpected = new PlayerScore(1, 0, Point.POINTS_0, 0);
         MatchScore expected = new MatchScore(playerOneScoreExpected, playerTwoScoreExpected);
+
+        assertThat(result.isTiebreak()).isFalse();
 
         assertThat(result).isEqualTo(expected);
     }
