@@ -46,7 +46,7 @@ public class FinishedMatchesPersistenceService {
 
         if (page > pageCount) {
             session.getTransaction().rollback();
-            throw new NotFoundException("No more matches found");
+            throw new NotFoundException(String.format("Page number %d is greater than page size %d", page, pageCount));
         }
 
         List<Match> matches = matchRepository.findMatchesByFilter(filter, offset, PAGE_SIZE);
