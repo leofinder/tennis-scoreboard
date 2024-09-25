@@ -318,8 +318,8 @@ legend {
 
 .result-item {
     display: grid;
-    grid-template-columns: 10% 30% 30% 30%;
-    padding: 10px 0;
+    grid-template-columns: 13% 29% 29% 29%;
+    padding: 4px 0;
     border-bottom: 1px solid #ddd;
     font-size: 1.2rem;
 }
@@ -327,7 +327,7 @@ legend {
 .result-item .id,
 .result-item .player,
 .result-item .winner {
-    padding: 8px;
+    padding: 5px;
     text-align: left;
 }
 
@@ -382,13 +382,20 @@ legend {
 
 /* Media Queries for Mobile Devices */
 @media (max-width: 768px) {
-    header {
-        text-align: center;
+    body {
+        font-size: 0.9rem;
+        line-height: 1.0;
     }
 
     .header-menu__list {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .header-menu__link {
+        padding: 5px 8px;
+        font-size: 0.9rem;
     }
 
     main {
@@ -400,40 +407,39 @@ legend {
         font-size: 1.3rem;
     }
 
-    .score-header,
-    .score-row {
-        grid-template-columns: 1fr 1fr;
+    .score-header, .score-row {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 5px;
+        font-size: 0.8rem;
     }
 
-    .score-header div:nth-child(3),
-    .score-header div:nth-child(4),
-    .score-row div:nth-child(3),
-    .score-row div:nth-child(4) {
-        display: none;
+    .score-row div:first-child {
+        white-space: normal;
+        word-wrap: break-word;
     }
 
-    .score-button-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    button {
-        width: 100%;
-        padding: 12px;
-        margin-top: 10px;
-    }
-
-    .search-input {
-        width: 100%;
-    }
-
-    .pagination {
-        flex-wrap: wrap;
+    .search-form {
         gap: 5px;
     }
 
-    .pagination-link {
-        padding: 8px 12px;
+    .search-input {
+        padding: 16px;
+        font-size: 1rem;
+    }
+
+    .result-item {
+        grid-template-columns: 10% 30% 30% 30%;
+        font-size: 0.9rem;
+        padding: 5px 0;
+    }
+
+    .pagination-info {
         font-size: 0.9rem;
     }
+
+    .pagination-link {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
 }
