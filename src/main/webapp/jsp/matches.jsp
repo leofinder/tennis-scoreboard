@@ -28,7 +28,7 @@
         <section>
             <h1>Matches</h1>
             <div class="search-pagination-container">
-                <!-- Форма поиска -->
+
                 <form action="/matches" method="GET" class="search-form">
                     <input type="text" name="filter_by_player_name" placeholder="Search..." class="search-input" value="${requestScope.playerName}">
                     <button type="submit" class="search-button">Search</button>
@@ -79,8 +79,8 @@
 
     <script>
         function clearSearch() {
-            document.querySelector('.search-input').value = ''; // Очищаем поле поиска
-            document.querySelector('form').submit(); // Отправляем форму для обновления страницы
+            document.querySelector('.search-input').value = '';
+            document.querySelector('form').submit();
         }
     </script>
 </body>
