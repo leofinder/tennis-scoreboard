@@ -27,9 +27,7 @@ public class ExceptionFilter implements Filter {
             req.getRequestDispatcher(JspHelper.getPath("400")).forward(req, resp);
         } catch (NotFoundException e) {
             log.error("HTTP Response Code: {}. {}", HttpServletResponse.SC_NOT_FOUND, e.getMessage(), e);
-            HttpServletRequest req = (HttpServletRequest) servletRequest;
-            HttpServletResponse resp = (HttpServletResponse) servletResponse;
-            req.getRequestDispatcher(JspHelper.getPath("404")).forward(req, resp);
+            throw e;
         } catch (RuntimeException e) {
             log.error("HTTP Response Code: {}. {}", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage(), e);
             throw e;
