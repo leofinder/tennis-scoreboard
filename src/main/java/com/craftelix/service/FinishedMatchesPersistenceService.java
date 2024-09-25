@@ -38,6 +38,9 @@ public class FinishedMatchesPersistenceService {
 
         Long count = matchRepository.countMatchesByFilter(filter);
 
+        if (page < 1) {
+            page = 1;
+        }
         int offset = (page - 1) * PAGE_SIZE;
         int pageCount = count == 0 ? 1 : (int) (count + PAGE_SIZE - 1) / PAGE_SIZE;
 
