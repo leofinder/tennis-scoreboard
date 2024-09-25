@@ -20,7 +20,7 @@ public class FinishedMatchesPersistenceService {
 
     private static final FinishedMatchesPersistenceService INSTANCE = new FinishedMatchesPersistenceService();
 
-    private final int PAGE_SIZE = 10;
+    private final int PAGE_SIZE = 7;
 
     private final PlayerService playerService = PlayerService.getInstance();
 
