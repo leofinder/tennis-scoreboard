@@ -23,6 +23,7 @@ public class ExceptionFilter implements Filter {
             log.error("HTTP Response Code: {}. {}", HttpServletResponse.SC_BAD_REQUEST, e.getMessage(), e);
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
+            req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher(JspHelper.getPath("400")).forward(req, resp);
         } catch (NotFoundException e) {
             log.error("HTTP Response Code: {}. {}", HttpServletResponse.SC_NOT_FOUND, e.getMessage(), e);

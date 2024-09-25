@@ -12,8 +12,7 @@
     <main>
         <h1>400 - Bad Request</h1>
         <div class="error-card">
-            <p>Oops! It seems that your request was not understood by the server.</p>
-            <p>Please check your input and try again.</p>
+            <p>${error}</p>
         </div>
     </main>
 </body>
