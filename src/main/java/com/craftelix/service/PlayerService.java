@@ -13,35 +13,15 @@ public class PlayerService {
 
     private static final PlayerService INSTANCE = new PlayerService();
 
+    private final PlayerRepository playerRepository = PlayerRepository.getInstance();
+
     public static PlayerService getInstance() {
         return INSTANCE;
     }
 
-    public Player findOrSavePlayer(Session session, Player player) {
-        PlayerRepository playerRepository = new PlayerRepository(session);
+    public Player findOrSavePlayer(Player player) {
         return playerRepository.findByName(player.getName())
                 .orElseGet(() -> playerRepository.save(player));
     }
 
-    public Player findOrSavePlayer(Player player) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-
-        player = findOrSavePlayer(session, player);
-
-        session.getTransaction().commit();
-
-        return player;
-    }
-
-    public void findOrSavePlayers(Player... players) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-
-        for (Player player : players) {
-            findOrSavePlayer(session, player);
-        }
-
-        session.getTransaction().commit();
-    }
 }

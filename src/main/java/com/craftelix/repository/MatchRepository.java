@@ -2,6 +2,7 @@ package com.craftelix.repository;
 
 import com.craftelix.dto.FilterRequestDto;
 import com.craftelix.entity.Match;
+import com.craftelix.util.HibernateUtil;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -12,11 +13,19 @@ import java.util.List;
 
 public class MatchRepository extends RepositoryBase<Long, Match> {
 
-    public MatchRepository(Session session) {
-        super(Match.class, session);
+    private static final MatchRepository INSTANCE = new MatchRepository();
+
+    private MatchRepository() {
+        super(Match.class);
+    }
+
+    public static MatchRepository getInstance() {
+        return INSTANCE;
     }
 
     public List<Match> findMatchesByFilter(FilterRequestDto filter, int offset, int limit) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Match> criteria = cb.createQuery(Match.class);
         Root<Match> match = criteria.from(Match.class);
@@ -32,6 +41,8 @@ public class MatchRepository extends RepositoryBase<Long, Match> {
     }
 
     public Long countMatchesByFilter(FilterRequestDto filter) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Long> criteria = cb.createQuery(Long.class);
         Root<Match> match = criteria.from(Match.class);

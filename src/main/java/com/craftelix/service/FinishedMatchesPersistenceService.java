@@ -8,7 +8,7 @@ import com.craftelix.mapper.FinishedMatchMapper;
 import com.craftelix.repository.MatchRepository;
 import com.craftelix.util.HibernateUtil;
 import lombok.NoArgsConstructor;
-import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +24,8 @@ public class FinishedMatchesPersistenceService {
 
     private final PlayerService playerService = PlayerService.getInstance();
 
+    private final MatchRepository matchRepository = MatchRepository.getInstance();
+
     private final FinishedMatchMapper finishedMatchMapper = FinishedMatchMapper.INSTANCE;
 
     public static FinishedMatchesPersistenceService getInstance() {
@@ -31,52 +33,64 @@ public class FinishedMatchesPersistenceService {
     }
 
     public MatchFilterResponseDto findByFilter(FilterRequestDto filter, Integer page) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
 
-        MatchRepository matchRepository = new MatchRepository(session);
+        Transaction transaction = null;
 
-        Long count = matchRepository.countMatchesByFilter(filter);
+        try {
+            transaction = HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 
-        if (page < 1) {
-            page = 1;
+            Long count = matchRepository.countMatchesByFilter(filter);
+            page = page < 1 ? 1 : page;
+            int offset = (page - 1) * PAGE_SIZE;
+            int pagesCount = count == 0 ? 1 : (int) (count + PAGE_SIZE - 1) / PAGE_SIZE;
+
+            if (page > pagesCount) {
+                throw new NotFoundException(String.format("Page number %d is greater than page size %d", page, pagesCount));
+            }
+
+            List<Match> matches = matchRepository.findMatchesByFilter(filter, offset, PAGE_SIZE);
+            List<FinishedMatchResponseDto> matchesDto = matches.stream()
+                    .map(finishedMatchMapper::toDto)
+                    .collect(Collectors.toList());
+
+            transaction.commit();
+
+            return new MatchFilterResponseDto(page, pagesCount, filter.getPlayerName(), matchesDto);
+
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
         }
-        int offset = (page - 1) * PAGE_SIZE;
-        int pagesCount = count == 0 ? 1 : (int) (count + PAGE_SIZE - 1) / PAGE_SIZE;
-
-        if (page > pagesCount) {
-            session.getTransaction().rollback();
-            throw new NotFoundException(String.format("Page number %d is greater than page size %d", page, pagesCount));
-        }
-
-        List<Match> matches = matchRepository.findMatchesByFilter(filter, offset, PAGE_SIZE);
-        List<FinishedMatchResponseDto> matchesDto =  matches.stream()
-                                                        .map(finishedMatchMapper::toDto)
-                                                        .collect(Collectors.toList());
-
-        session.getTransaction().commit();
-
-        return new MatchFilterResponseDto(page, pagesCount, filter.getPlayerName(), matchesDto);
     }
 
     public void save(FinishedMatchRequestDto finishedMatchRequestDto) {
-        Match match = finishedMatchMapper.toEntity(finishedMatchRequestDto);
 
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+        Transaction transaction = null;
 
-        Player playerOne = playerService.findOrSavePlayer(session, match.getPlayerOne());
-        Player playerTwo = playerService.findOrSavePlayer(session, match.getPlayerTwo());
-        Player winner = playerService.findOrSavePlayer(session, match.getWinner());
+        try {
+            Match match = finishedMatchMapper.toEntity(finishedMatchRequestDto);
 
-        MatchRepository matchRepository = new MatchRepository(session);
-        matchRepository.save(Match.builder()
-                        .playerOne(playerOne)
-                        .playerTwo(playerTwo)
-                        .winner(winner)
-                        .build());
+            transaction = HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
 
-        session.getTransaction().commit();
+            Player playerOne = playerService.findOrSavePlayer(match.getPlayerOne());
+            Player playerTwo = playerService.findOrSavePlayer(match.getPlayerTwo());
+            Player winner = playerService.findOrSavePlayer(match.getWinner());
+
+            matchRepository.save(Match.builder()
+                    .playerOne(playerOne)
+                    .playerTwo(playerTwo)
+                    .winner(winner)
+                    .build());
+
+            transaction.commit();
+        } catch (RuntimeException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
 }
