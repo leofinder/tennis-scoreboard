@@ -24,8 +24,6 @@ public class OngoingMatchesService {
 
     private final PlayerMapper playerMapper = PlayerMapper.INSTANCE;
 
-    private final PlayerService playerService = PlayerService.getInstance();
-
     public static OngoingMatchesService getInstance() {
         return INSTANCE;
     }
@@ -33,8 +31,6 @@ public class OngoingMatchesService {
     public UUID createMatch(PlayerRequestDto playerOneRequestDto, PlayerRequestDto playerTwoRequestDto) {
         Player playerOne = playerMapper.toEntity(playerOneRequestDto);
         Player playerTwo = playerMapper.toEntity(playerTwoRequestDto);
-
-        playerService.findOrSavePlayers(playerOne, playerTwo);
 
         UUID uuid = UUID.randomUUID();
 
