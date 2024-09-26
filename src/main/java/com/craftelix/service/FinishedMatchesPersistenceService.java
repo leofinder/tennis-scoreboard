@@ -42,11 +42,11 @@ public class FinishedMatchesPersistenceService {
             page = 1;
         }
         int offset = (page - 1) * PAGE_SIZE;
-        int pageCount = count == 0 ? 1 : (int) (count + PAGE_SIZE - 1) / PAGE_SIZE;
+        int pagesCount = count == 0 ? 1 : (int) (count + PAGE_SIZE - 1) / PAGE_SIZE;
 
-        if (page > pageCount) {
+        if (page > pagesCount) {
             session.getTransaction().rollback();
-            throw new NotFoundException(String.format("Page number %d is greater than page size %d", page, pageCount));
+            throw new NotFoundException(String.format("Page number %d is greater than page size %d", page, pagesCount));
         }
 
         List<Match> matches = matchRepository.findMatchesByFilter(filter, offset, PAGE_SIZE);
@@ -56,7 +56,7 @@ public class FinishedMatchesPersistenceService {
 
         session.getTransaction().commit();
 
-        return new MatchFilterResponseDto(page, pageCount, filter.getPlayerName(), matchesDto);
+        return new MatchFilterResponseDto(page, pagesCount, filter.getPlayerName(), matchesDto);
     }
 
     public void save(FinishedMatchRequestDto finishedMatchRequestDto) {
