@@ -2,9 +2,9 @@ package com.craftelix.service;
 
 import com.craftelix.dto.PlayerRequestDto;
 import com.craftelix.entity.Match;
-import com.craftelix.entity.MatchScore;
+import com.craftelix.entity.score.MatchScore;
 import com.craftelix.entity.Player;
-import com.craftelix.entity.PlayerScore;
+import com.craftelix.entity.score.PlayerScore;
 import com.craftelix.mapper.PlayerMapper;
 import lombok.NoArgsConstructor;
 

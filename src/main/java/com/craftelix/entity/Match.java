@@ -1,5 +1,6 @@
 package com.craftelix.entity;
 
+import com.craftelix.entity.score.MatchScore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

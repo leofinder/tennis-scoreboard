@@ -1,4 +1,4 @@
-package com.craftelix.entity;
+package com.craftelix.entity.score;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

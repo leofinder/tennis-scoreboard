@@ -1,4 +1,4 @@
-package com.craftelix.entity;
+package com.craftelix.entity.score;
 
 public enum Point {
     POINTS_0,

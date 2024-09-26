@@ -1,7 +1,7 @@
 package com.craftelix.mapper;
 
 import com.craftelix.dto.PlayerScoreResponseDto;
-import com.craftelix.entity.PlayerScore;
+import com.craftelix.entity.score.PlayerScore;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

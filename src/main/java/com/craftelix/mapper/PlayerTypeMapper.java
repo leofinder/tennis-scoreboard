@@ -1,6 +1,6 @@
 package com.craftelix.mapper;
 
-import com.craftelix.entity.PlayerType;
+import com.craftelix.entity.type.PlayerType;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;

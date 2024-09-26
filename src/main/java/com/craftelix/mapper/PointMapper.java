@@ -1,6 +1,6 @@
 package com.craftelix.mapper;
 
-import com.craftelix.entity.Point;
+import com.craftelix.entity.score.Point;
 import org.mapstruct.Mapper;
 import org.mapstruct.ValueMapping;
 import org.mapstruct.factory.Mappers;

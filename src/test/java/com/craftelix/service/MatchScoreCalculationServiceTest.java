@@ -1,9 +1,9 @@
 package com.craftelix.service;
 
-import com.craftelix.entity.MatchScore;
-import com.craftelix.entity.PlayerScore;
-import com.craftelix.entity.PlayerType;
-import com.craftelix.entity.Point;
+import com.craftelix.entity.score.MatchScore;
+import com.craftelix.entity.score.PlayerScore;
+import com.craftelix.entity.type.PlayerType;
+import com.craftelix.entity.score.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
