@@ -38,7 +38,8 @@ public class FinishedMatchesPersistenceService {
         Transaction transaction = null;
 
         try {
-            transaction = HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            transaction = session.beginTransaction();
 
             Long count = matchRepository.countMatchesByFilter(filter);
             page = page < 1 ? 1 : page;
