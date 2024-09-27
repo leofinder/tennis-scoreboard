@@ -2,6 +2,10 @@
 
 Tennis Scoreboard is a Java-based web application that tracks and manages tennis matches, players, and scores. The application uses Hibernate for ORM, PostgreSQL as the database, and Tomcat for running the WAR file. Docker Compose is used to set up and run the PostgreSQL database.
 
+![New Match](https://github.com/user-attachments/assets/1c0c33ea-1489-4ba5-8dd1-95b794824e65)
+![Tennis Score Tracker](https://github.com/user-attachments/assets/61b50ba0-68be-42e0-937a-f9f2f5886582)
+![Matches](https://github.com/user-attachments/assets/b894d2ca-cf57-4ed8-8574-883f36dad609)
+
 ## Prerequisites
 
 Make sure you have the following installed on your machine:
