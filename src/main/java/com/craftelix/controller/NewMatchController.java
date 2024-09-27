@@ -39,6 +39,6 @@ public class NewMatchController extends HttpServlet {
 
         UUID uuid = ongoingMatchesService.createMatch(playerOneRequestDto, playerTwoRequestDto);
 
-        resp.sendRedirect("/match-score?uuid=" + uuid.toString());
+        resp.sendRedirect(String.format("%s/match-score?uuid=%s", req.getContextPath(), uuid.toString()));
     }
 }

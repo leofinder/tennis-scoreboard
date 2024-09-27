@@ -6,20 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Score. Tennis Scoreboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
     <header>
         <nav class="header-menu">
             <ul class="header-menu__list">
                 <li class="header-menu__item">
-                    <a href="/" class="header-menu__link">Main</a>
+                    <a href="${pageContext.request.contextPath}/" class="header-menu__link">Main</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="/new-match" class="header-menu__link">New Match</a>
+                    <a href="${pageContext.request.contextPath}/new-match" class="header-menu__link">New Match</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="/matches" class="header-menu__link">Matches</a>
+                    <a href="${pageContext.request.contextPath}/matches" class="header-menu__link">Matches</a>
                 </li>
             </ul>
         </nav>
@@ -64,7 +64,7 @@
                     </c:if>
                 </div>
 
-                <form action="/match-score?uuid=${uuid}" method="POST" onsubmit="setTimeout(disableButtons, 0)">
+                <form action="${pageContext.request.contextPath}/match-score?uuid=${uuid}" method="POST" onsubmit="setTimeout(disableButtons, 0)">
                     <div class="score-button-container">
                         <button type="submit" class="score-button" name="player" value="player-one">Player 1 won the point</button>
                         <button type="submit" class="score-button" name="player" value="player-two">Player 2 won the point</button>

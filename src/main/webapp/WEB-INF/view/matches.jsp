@@ -6,20 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matches. Tennis Scoreboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
     <header>
         <nav class="header-menu">
             <ul class="header-menu__list">
                 <li class="header-menu__item">
-                    <a href="/" class="header-menu__link">Main</a>
+                    <a href="${pageContext.request.contextPath}/" class="header-menu__link">Main</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="/new-match" class="header-menu__link">New Match</a>
+                    <a href="${pageContext.request.contextPath}/new-match" class="header-menu__link">New Match</a>
                 </li>
                 <li class="header-menu__item">
-                    <a href="/matches" class="header-menu__link current">Matches</a>
+                    <a href="${pageContext.request.contextPath}/matches" class="header-menu__link current">Matches</a>
                 </li>
             </ul>
         </nav>
@@ -29,7 +29,7 @@
             <h1>Matches</h1>
             <div class="search-pagination-container">
 
-                <form action="/matches" method="GET" class="search-form">
+                <form action="${pageContext.request.contextPath}/matches" method="GET" class="search-form">
                     <input type="text" name="filter_by_player_name" placeholder="Search..." class="search-input" value="${requestScope.playerName}">
                     <button type="submit" class="search-button">Search</button>
                     <button type="button" class="clear-button" onclick="clearSearch()">х</button>

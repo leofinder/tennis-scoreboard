@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Score. Tennis Scoreboard</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
 </head>
 <body>
     <%@include file="header.jsp"%>
@@ -14,7 +14,7 @@
             <h1>Match Result</h1>
             <div class="match-result-card">
                 <div class="match-result-card__players">
-                    <div class="_match-result-card__player">
+                    <div class="match-result-card__player">
                         <strong>${match.playerOne.name}</strong>
                         <div class="match-result-card__set-points">${match.score.playerOneScore.set}</div>
                     </div>
