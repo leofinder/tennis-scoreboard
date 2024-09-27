@@ -8,6 +8,7 @@ import com.craftelix.mapper.FinishedMatchMapper;
 import com.craftelix.repository.MatchRepository;
 import com.craftelix.util.HibernateUtil;
 import lombok.NoArgsConstructor;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
@@ -67,16 +68,17 @@ public class FinishedMatchesPersistenceService {
 
     public void save(FinishedMatchRequestDto finishedMatchRequestDto) {
 
+        Match match = finishedMatchMapper.toEntity(finishedMatchRequestDto);
+
+        Player playerOne = playerService.saveOrFindPlayer(match.getPlayerOne());
+        Player playerTwo = playerService.saveOrFindPlayer(match.getPlayerTwo());
+        Player winner = playerService.findPlayer(match.getWinner());
+
         Transaction transaction = null;
 
         try {
-            Match match = finishedMatchMapper.toEntity(finishedMatchRequestDto);
-
-            transaction = HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();
-
-            Player playerOne = playerService.findOrSavePlayer(match.getPlayerOne());
-            Player playerTwo = playerService.findOrSavePlayer(match.getPlayerTwo());
-            Player winner = playerService.findOrSavePlayer(match.getWinner());
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            transaction = session.beginTransaction();
 
             matchRepository.save(Match.builder()
                     .playerOne(playerOne)
